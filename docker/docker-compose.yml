@@ -7,6 +7,15 @@ services:
       - "6379:6379"
     volumes:
       - redis-data:/var/lib/redis/data
+  db:
+    image: mysql:8.0  # MySQL image with version 8.0 (adjust if needed)
+    environment:
+      MYSQL_ROOT_PASSWORD: WDR0aDBtZzRudGgwIQ==  # Set a strong root password
+    volumes:
+      - mysql-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
 
 volumes:
-  redis-data: {}
+  redis-data:
+  mysql-data:

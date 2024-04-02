@@ -1,7 +1,10 @@
 import { jwtModuler } from './module/jwt.module';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { AuthPayloadDto } from './dto/auth.dto';
+import { AuthPayloadDto } from '../dto/auth.dto';
 import { JwtService } from '@nestjs/jwt';
+import { UserRegisterDto } from '../dto/createUser.dto';
+import User from '../typeorm/entities/user.entity';
+import { UserService } from '../user/user.service';
 
 
 const userFake = [
@@ -20,9 +23,15 @@ const userFake = [
 @Injectable()
 export class AuthService {
   constructor(
-    private jwtService : JwtService
+    private jwtService : JwtService,
+    private userService : UserService
   ){}
 
+  async createCredentialAccount (createUserDto : UserRegisterDto) {
+    const user : User = await this.userService.findUserById(createUserDto.email);
+
+
+  }
   // Validate User (Regular Login)
   validateUser(authPayloadDto: AuthPayloadDto) {
     const findUser = userFake.find(user => user.username === authPayloadDto.username)

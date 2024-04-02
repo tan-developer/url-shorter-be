@@ -1,0 +1,13 @@
+{
+  "type": "mysql",
+  "host": "tanhomedevserver.ddns.net",
+  "port": 3306,
+  "username": "root",
+  "password": "WDR0aDBtZzRudGgwIQ==",
+  "database": "url_store",
+  "synchronize": false,
+  "entities": [
+    "src/entity/**/*.ts"
+  ]
+}
+

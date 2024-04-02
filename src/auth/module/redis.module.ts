@@ -5,7 +5,7 @@ import {CacheModule} from '@nestjs/cache-manager'
 export const CacheModuler = CacheModule.register({
   isGlobal : true,
   store : redisStore,
-  host: "tanhomedevserver.ddns.net",
-  port : 3001.,
+  host: "localhost",
+  port : 6379,
   no_ready_check: true
 }) 
