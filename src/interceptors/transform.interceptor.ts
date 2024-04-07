@@ -26,12 +26,12 @@ export class TransformationInterceptor<T> implements NestInterceptor<T,
     const now = Date.now();
     return next.handle().pipe(
       map((data) => ({
-        message: this.reflector.get<string>('response_message',
-          context.getHandler()) || data.message || '',
+        message: this.reflector?.get<string>('response_message',
+          context?.getHandler()) || data?.message || '',
         code: context.switchToHttp().getResponse().statusCode,
         timeStamp : Date.now(),
         path : context.switchToHttp().getRequest().path,
-        executionTime :this.requestService.getTimestamp() - now,
+        executionTime :now - this.requestService.getTimestamp() ,
         requestId : this.requestService.getRequestId(),
         data: data,
       }))

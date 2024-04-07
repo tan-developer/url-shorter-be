@@ -7,7 +7,7 @@ import { RequestService } from '../request.service';
 // Exception filter wrapper
 
 @Injectable({scope : Scope.REQUEST})
-@Catch(Error , HttpException)
+@Catch(Error , HttpException , )
 export class HttpExceptionFilter implements ExceptionFilter {
   constructor(private readonly requestService : RequestService) {}
   catch(exception: Error | HttpException, host: ArgumentsHost): void {
@@ -24,8 +24,14 @@ export class HttpExceptionFilter implements ExceptionFilter {
         message : exception.message,
         requestId : this.requestService.getRequestId()
       }
-      response
-        .status(status)
-        .json(errorResponse)
+      if (status === 401) {
+        response
+          .status(status)
+      } else {
+        response
+          .status(status)
+          .json(errorResponse)
+      }
+
   }
 }

@@ -3,19 +3,19 @@ import { Entity, PrimaryGeneratedColumn, Column, PrimaryColumn } from 'typeorm';
 export default class User {
   @PrimaryGeneratedColumn('uuid')
   @Column({name : "USER_ID" , primary : true , generatedIdentity : 'BY DEFAULT'})
-  private _id: string;
+  _id: string;
 
   @Column({ type: 'varchar', name : "EMAIL", nullable: false, unique: true })
-  private _email: string;
+  _email: string;
 
-  @Column({ type: 'varchar', name : "FULL_NAME", nullable: false, unique: true })
-  private _fullName : string;
+  @Column({ type: 'varchar', name : "FULL_NAME", nullable: false})
+  _fullName : string;
 
   @Column({ type: 'varchar' , name : "PASSWORD", nullable: false})
-  private _password: string;
+  _password: string;
 
   @Column({type : 'varchar' , name : "PHONE" , nullable : true})
-  private _phone: string;
+  _phone: string;
 
   get fullName(): string {
     return this._fullName;

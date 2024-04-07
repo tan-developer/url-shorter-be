@@ -16,9 +16,13 @@ export class UserService {
     private userRepo : Repository<User>
   ) {}
 
-  findUserById(userId : string) : Promise<User> {
+  findUserByEmail(email : string) : Promise<User> {
     return this.userRepo.findOneBy({
-      id: userId
+      _email: email
     })
+  }
+
+  saveUser (user : User) : Promise<any> {
+    return this.userRepo.save(user)
   }
 }

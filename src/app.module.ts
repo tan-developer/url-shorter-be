@@ -11,23 +11,32 @@ import { AuthenticationMiddleware } from './middleware/authentication.middleware
 import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { TransformationInterceptor } from './interceptors/transform.interceptor';
 import { HttpExceptionFilter } from './filters/http-exception.filter';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { CacheModule } from '@nestjs/cache-manager';
+import * as redisStore from 'cache-manager-ioredis';
 
 @Module({
   imports: [
     ConfigModuler,
+    CacheModule.register({
+      isGlobal : true,
+      store : redisStore,
+      host: "localhost",
+      port : 6379,
+      no_ready_check: true
+    }),
     DataSource,
-    // TypeOrmModule.forRoot({
-    //   type: 'mysql',
-    //   host: 'tanhomedevserver.ddns.net',
-    //   port: 3306,
-    //   username: 'root',
-    //   password: 'WDR0aDBtZzRudGgwIQ==',
-    //   database: 'url_store',
-    //   entities: ['dist/typeorm/entities/*.entity{.ts,.js}'],
-    //   synchronize: true,:?????????m hihi Khanh :>>>>994999
-    // }),
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: 'localhost',
+      port: 3306,
+      username: 'root',
+      password: 'WDR0aDBtZzRudGgwIQ==',
+      database: 'url_store',
+      entities: ['dist/typeorm/entities/*.entity{.ts,.js}'],
+      synchronize: true,
+    }),
     AuthModule,
-    CacheModuler,
     UserModule,
   ],
 
